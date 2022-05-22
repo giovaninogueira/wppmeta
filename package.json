@@ -1,0 +1,47 @@
+{
+  "name": "wppmeta",
+  "version": "1.0.0",
+  "description": "Library of integration with whatsapp cloud api",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"lib/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giovaninogueira/wppmeta.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "integration",
+    "meta",
+    "facebook",
+    "node"
+  ],
+  "author": "Giovani Cassiano Nogueira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giovaninogueira/wppmeta/issues"
+  },
+  "homepage": "https://github.com/giovaninogueira/wppmeta#readme",
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "jest": "^28.1.0",
+    "prettier": "^2.6.2",
+    "ts-jest": "^28.0.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.6.4"
+  }
+}
