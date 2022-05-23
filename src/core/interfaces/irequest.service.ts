@@ -1,0 +1,3 @@
+interface IRequestService {}
+
+export { IRequestService }
