@@ -1,0 +1,3 @@
+interface IWhatsAppPhone {}
+
+export { IWhatsAppPhone }
