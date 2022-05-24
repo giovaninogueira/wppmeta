@@ -1,6 +1,7 @@
 interface IResponse<T = any> {
   data?: T;
   error?: T;
+  headers?: T;
   status: number;
 }
 

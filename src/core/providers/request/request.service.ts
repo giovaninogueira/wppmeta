@@ -32,6 +32,7 @@ class RequestService implements IRequestService {
         .catch((error) =>
           reject({
             error: error.response.data.error,
+            headers: error.response.headers,
             status: error.response.status,
           }),
         )
