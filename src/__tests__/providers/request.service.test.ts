@@ -23,16 +23,18 @@ describe('Test of provider request', () => {
     expect(response.data).toBeDefined()
   })
 
-  it('RequestService get - Error', () => {
+  it('RequestService get - Error HTTP', () => {
     const requestService = new RequestService()
     mockedAxios.get.mockRejectedValueOnce({
       response: {
-        data: {},
+        data: {
+          error: 'error http'
+        },
         status: 400
       }
     })
 
-    requestService.get({ url: 'www.teste.com.br', token: '123456' }).catch((response) => {
+    requestService.get({ url: 'www.teste.com.br', token: '545878' }).catch((response) => {
       expect(response.status).toBe(400)
       expect(response.error).toBeDefined()
     })

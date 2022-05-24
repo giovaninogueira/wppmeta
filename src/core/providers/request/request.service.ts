@@ -31,8 +31,8 @@ class RequestService implements IRequestService {
         )
         .catch((error) =>
           reject({
-            error: error?.response?.data?.error || 'error',
-            status: error?.response?.status || 500,
+            error: error.response.data.error,
+            status: error.response.status,
           }),
         )
     })
