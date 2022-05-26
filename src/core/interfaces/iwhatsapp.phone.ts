@@ -16,12 +16,31 @@ interface IResponseWhatsAppPhone {
   id: String;
 }
 
+interface IRegisterPhone {
+  phoneId: string;
+  messagingProduct: 'whatsapp',
+  pin: string;
+}
+
 interface IWhatsAppPhone {
+
   /**
-   * Get phones of account
+   * With the phone number’s ID in hand, you can register it. 
+   * In the registration API call, you perform two actions at the same time
+   *  - Register the phone.
+   *  - Enable two-step verification by setting a 6-digit registration code
+   * @param registerPhone 
+   * @returns { Promise<boolean | IWhatsAppErrorAPI> }
+   */
+  registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI>;
+
+  /**
+   * Get phones of business account
    * @returns { Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> }
    */
   getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI>;
+
+
 }
 
-export { IWhatsAppPhone, IPhoneWhatsApp, IResponseWhatsAppPhone }
+export { IWhatsAppPhone, IPhoneWhatsApp, IResponseWhatsAppPhone, IRegisterPhone }

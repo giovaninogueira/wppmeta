@@ -1,28 +1,50 @@
 import { IRequestService } from '../../interfaces/irequest.service'
 import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
-import { IPhoneWhatsApp, IResponseWhatsAppPhone, IWhatsAppPhone } from '../../interfaces/iwhatsapp.phone'
-import 'dotenv/config'
+import {
+  IPhoneWhatsApp,
+  IRegisterPhone,
+  IResponseWhatsAppPhone,
+  IWhatsAppPhone,
+} from '../../interfaces/iwhatsapp.phone'
+import { getUrl } from '../../utils/generate-url'
 
 class WhatsAppPhone implements IWhatsAppPhone {
-  constructor(
-    private request: IRequestService, 
-    private token: string,
-    private accountId?: string,
-  ) {
+  constructor(private request: IRequestService, private token: string, private accountId?: string) {
     this.accountId = this.accountId ?? process.env.WHATSAPP_ACCOUNT_ID_CLOUD_API
   }
 
   /**
-   * Get phones of account
-   * @returns { Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> }
+   * @inheritdoc
    */
-  async getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> {
-    const url = `${process.env.URL_WHATSAPP_CLOUD_API_META}/${this.accountId}/phone_numbers` as string
+  registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI> {
+    const url = getUrl(`/${registerPhone.phoneId}/register`)
     return new Promise((resolve, reject) => {
       this.request
-        .get({ 
-          url, 
-          token: this.token 
+        .post({
+          url,
+          token: this.token,
+          data: {
+            messaging_product: registerPhone.messagingProduct,
+            pin: registerPhone.pin,
+          },
+        })
+        .then((response) => {
+          resolve(response.data.success === 'true')
+        })
+        .catch((error: IWhatsAppErrorAPI) => reject(error))
+    })
+  }
+
+  /**
+   * @inheritdoc
+   */
+  async getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> {
+    const url = getUrl(`/${this.accountId}/phone_numbers`)
+    return new Promise((resolve, reject) => {
+      this.request
+        .get({
+          url,
+          token: this.token,
         })
         .then((response) => {
           const phones = response.data.map((data: IResponseWhatsAppPhone) => {

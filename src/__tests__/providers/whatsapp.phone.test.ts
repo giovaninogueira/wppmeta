@@ -2,6 +2,10 @@ import { RequestService } from '../../core/providers/request/request.service'
 import { WhatsAppPhone } from '../../core/providers/whatsapp/whatsapp.phone'
 
 describe('Test of provider WhatsApp Phone', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('Test List of phones - Ok', async () => {
     const request = new RequestService()
     jest.spyOn(request, 'get').mockResolvedValue({
@@ -48,6 +52,44 @@ describe('Test of provider WhatsApp Phone', () => {
             })
         )
     })
-    expect(true).toBe(true)
+  })
+
+  it('Test register phones - Ok', async () => {
+    const request = new RequestService()
+    jest.spyOn(request, 'post').mockResolvedValue({
+      data: 'true',
+      status: 200,
+    })
+    
+    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    const success = await whatsAppPhone.registerPhone({
+      messagingProduct: 'whatsapp',
+      phoneId: '6545889',
+      pin: '123456'
+    })
+    expect(success).toEqual(true)
+  })
+
+  it('Test List of phones - Error', async () => {
+    const request = new RequestService()
+    jest.spyOn(request, 'post').mockRejectedValue({
+      error: 'error',
+      headers: {},
+      status: 400,
+    })
+    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    whatsAppPhone.registerPhone({
+      messagingProduct: 'whatsapp',
+      phoneId: '6545889',
+      pin: '123456'
+    }).catch((error) => {
+        console.log(error)
+        expect(error).toEqual(
+            expect.objectContaining({
+                error: expect.any(String),
+                status: expect.any(Number)
+            })
+        )
+    })
   })
 })
