@@ -1,7 +1,7 @@
 import { IWhatsApp } from '../../interfaces/iwhatsapp'
 import { RequestService } from '../request/request.service'
 import { WhatsApp } from '../whatsapp/whatsapp'
-import { WhatsAppMessageService } from '../whatsapp/whatsapp.message'
+import { WhatsAppMessage } from '../whatsapp/whatsapp.message'
 import { WhatsAppPhone } from '../whatsapp/whatsapp.phone'
 
 interface IWppMetaConfig {
@@ -20,7 +20,7 @@ abstract class WppMeta {
     const request = new RequestService()
     return new WhatsApp(
       new WhatsAppPhone(request, wppConfig.token, wppConfig.phoneId, wppConfig.accountId),
-      new WhatsAppMessageService(request, wppConfig.token, wppConfig.phoneId, wppConfig.accountId),
+      new WhatsAppMessage(request, wppConfig.token, wppConfig.phoneId, wppConfig.accountId),
     )
   }
 }

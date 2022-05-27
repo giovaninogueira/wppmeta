@@ -20,35 +20,35 @@ class WhatsApp implements IWhatsApp {
   /**
    * @inheritdoc
    */
-  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI> {
+  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean > {
     return this.whatsPhone.registerPhone(registerPhone)
   }
 
   /**
    * @inheritdoc
    */
-  async getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> {
+  async getPhones(): Promise<IPhoneWhatsApp[] > {
     return this.whatsPhone.getPhones()
   }
 
   /**
    * @inheritdoc
    */
-  async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend > {
     return this.whatsMessage.sendText(message)
   }
 
   /**
    * @inheritdoc
    */
-  async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend > {
     return this.whatsMessage.sendMidia(message)
   }
 
   /**
    * @inheritdoc
    */
-  async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend > {
     return this.whatsMessage.sendLocation(message)
   }
 }

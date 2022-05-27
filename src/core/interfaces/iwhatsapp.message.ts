@@ -39,9 +39,9 @@ interface IRequestWhatsAppMessageLocationSend {
 
 
 interface IWhatsAppMessage {
-  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
-  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
-  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
+  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend >;
+  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend >;
+  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend >;
 }
 
 export {

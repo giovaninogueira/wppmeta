@@ -13,7 +13,7 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
   /**
    * @inheritdoc
    */
-  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI> {
+  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean > {
     const url = getUrl(`/${registerPhone.phoneId}/register`)
     return new Promise((resolve, reject) => {
       this.request
@@ -35,7 +35,7 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
   /**
    * @inheritdoc
    */
-  async getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI> {
+  async getPhones(): Promise<IPhoneWhatsApp[] > {
     const url = getUrl(`/${this.accountId}/phone_numbers`)
     return new Promise((resolve, reject) => {
       this.request

@@ -22,8 +22,8 @@ interface IRegisterPhone {
 }
 
 interface IWhatsAppPhone {
-  registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI>;
-  getPhones(): Promise<IPhoneWhatsApp[] | IWhatsAppErrorAPI>;
+  registerPhone(registerPhone: IRegisterPhone): Promise<boolean >;
+  getPhones(): Promise<IPhoneWhatsApp[] >;
 }
 
 export { IWhatsAppPhone, IPhoneWhatsApp, IResponseWhatsAppPhone, IRegisterPhone }

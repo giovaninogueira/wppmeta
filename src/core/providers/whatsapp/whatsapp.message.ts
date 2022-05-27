@@ -6,15 +6,21 @@ import {
   IWhatsAppMessage,
 } from '../../interfaces/iwhatsapp.message'
 import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
-import { MESSAGE_LOCATION, MESSAGE_MIDIA, MESSAGE_PRODUCT, MESSAGE_TEXT, RECIPIENT_TYPE } from '../../types/whatsapp.types'
+import {
+  MESSAGE_LOCATION,
+  MESSAGE_MIDIA,
+  MESSAGE_PRODUCT,
+  MESSAGE_TEXT,
+  RECIPIENT_TYPE,
+} from '../../types/whatsapp.types'
 import { getUrl } from '../../utils/generate-url'
 import { WhatsAppService } from './whatsapp.service'
 
-class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage {
+class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
   /**
    * @inheritdoc
    */
-  async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend> {
     const objRequest = this.makeObjRequestText(message)
     return this.requestMessage(objRequest)
   }
@@ -22,7 +28,7 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
   /**
    * @inheritdoc
    */
-  async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend> {
     const objRequest = this.makeObjRequestMidia(message)
     return this.requestMessage(objRequest)
   }
@@ -30,14 +36,14 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
   /**
    * @inheritdoc
    */
-  async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+  async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend> {
     const objRequest = this.makeObjRequestLocation(message)
     return this.requestMessage(objRequest)
   }
 
   /**
    * Request Message
-   * @param objRequest 
+   * @param objRequest
    * @returns { Promise<any> }
    */
   private async requestMessage(objRequest: any): Promise<any> {
@@ -58,7 +64,7 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
 
   /**
    * Make Response
-   * @param data 
+   * @param data
    * @returns { IResponseWhatsAppMessageSend }
    */
   private makeResponse(data: any): IResponseWhatsAppMessageSend {
@@ -72,7 +78,7 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
       }),
       messages: data.messages.map((message: any) => {
         return {
-          wamId: message.id
+          wamId: message.id,
         }
       }),
     }
@@ -80,9 +86,9 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
 
   /**
    * Make Obj request location
-   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   * @param { IRequestWhatsAppMessageMidiaSend } message
    */
-   private makeObjRequestLocation(message: IRequestWhatsAppMessageLocationSend) {
+  private makeObjRequestLocation(message: IRequestWhatsAppMessageLocationSend) {
     return {
       messaging_product: MESSAGE_PRODUCT,
       recipient_type: message.recipientType ?? RECIPIENT_TYPE,
@@ -94,7 +100,7 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
 
   /**
    * Make Obj request midia
-   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   * @param { IRequestWhatsAppMessageMidiaSend } message
    */
   private makeObjRequestMidia(message: IRequestWhatsAppMessageMidiaSend) {
     return {
@@ -127,4 +133,4 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
   }
 }
 
-export { WhatsAppMessageService }
+export { WhatsAppMessage }
