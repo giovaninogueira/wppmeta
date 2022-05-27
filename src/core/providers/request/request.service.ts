@@ -7,7 +7,7 @@ class RequestService implements IRequestService {
    * @param token
    * @returns {any}
    */
-  private makeHeaders(token: String): any {
+  private makeHeaders(token: string): any {
     return {
       headers: { Authorization: `Bearer ${token}` },
     }

@@ -3,6 +3,7 @@
     "plugins": ["@typescript-eslint"],
     "rules": {
       "semi": ["error", "never"],
-      "quotes": [2, "single"]
+      "quotes": [2, "single"],
+      "array-type": [true, "generic"]
     }
   }

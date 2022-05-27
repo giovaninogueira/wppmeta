@@ -1,19 +1,19 @@
 import { IWhatsAppErrorAPI } from './iwhatsapp.service'
 
 interface IPhoneWhatsApp {
-  id: String;
-  verifiedName: String;
+  id: string;
+  verifiedName: string;
   codeVerificationStatus: 'NOT_VERIFIED' | 'VERIFIED';
-  displayPhoneNumber: String;
-  qualityRating: String;
+  displayPhoneNumber: string;
+  qualityRating: string;
 }
 
 interface IResponseWhatsAppPhone {
-  verified_name: String;
+  verified_name: string;
   code_verification_status: 'NOT_VERIFIED' | 'VERIFIED';
-  display_phone_number: String;
-  quality_rating: String;
-  id: String;
+  display_phone_number: string;
+  quality_rating: string;
+  id: string;
 }
 
 interface IRegisterPhone {

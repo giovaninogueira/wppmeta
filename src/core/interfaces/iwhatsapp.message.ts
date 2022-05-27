@@ -2,13 +2,13 @@ import { IWhatsAppErrorAPI } from './iwhatsapp.service'
 
 interface IResponseWhatsAppMessageSend {
   messagingProduct: 'whatsapp';
-  contacts: Array<{
+  contacts: {
     phoneNumber: string;
     whatsAppId: string;
-  }>;
-  messages: Array<{
+  }[];
+  messages: {
     wamId: string;
-  }>;
+  }[];
 }
 
 interface IRequestWhatsAppMessageTextSend {

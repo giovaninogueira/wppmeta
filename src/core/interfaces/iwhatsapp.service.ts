@@ -12,6 +12,4 @@ interface IWhatsAppConfig {
   accountId?: string;
 }
 
-interface IWhatsAppService {}
-
-export { IWhatsAppService, IWhatsAppErrorAPI, IWhatsAppConfig }
+export { IWhatsAppErrorAPI, IWhatsAppConfig }
