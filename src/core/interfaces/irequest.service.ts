@@ -18,7 +18,7 @@ interface IRequestService {
    * @param { url, token }
    * @returns { Promise<IResponse> }
    */
-   post({ url, token, data }: { url: string; token: string, data: any }): Promise<IResponse>;
+  post({ url, token, data }: { url: string; token: string; data: any }): Promise<IResponse>;
 }
 
-export { IRequestService, IResponse }
+export { IRequestService, IResponse };

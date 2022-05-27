@@ -1,73 +1,73 @@
-import { RequestService } from './../../core/providers/request/request.service'
-import axios from 'axios'
+import { RequestService } from './../../core/providers/request/request.service';
+import axios from 'axios';
 
-jest.mock('axios')
-const mockedAxios = axios as jest.Mocked<typeof axios>
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Test of provider request', () => {
   afterEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   it('RequestService get - Ok', async () => {
-    const requestService = new RequestService()
+    const requestService = new RequestService();
     mockedAxios.get.mockResolvedValue({
       data: {
         data: {},
       },
       status: 200,
-    })
+    });
 
-    const response = await requestService.get({ url: 'www.teste.com.br', token: '123456' })
-    expect(response.status).toBe(200)
-    expect(response.data).toBeDefined()
-  })
+    const response = await requestService.get({ url: 'www.teste.com.br', token: '123456' });
+    expect(response.status).toBe(200);
+    expect(response.data).toBeDefined();
+  });
 
   it('RequestService get - Error HTTP', () => {
-    const requestService = new RequestService()
+    const requestService = new RequestService();
     mockedAxios.get.mockRejectedValueOnce({
       response: {
         data: {
-          error: 'error http'
+          error: 'error http',
         },
-        status: 400
-      }
-    })
+        status: 400,
+      },
+    });
 
     requestService.get({ url: 'www.teste.com.br', token: '545878' }).catch((response) => {
-      expect(response.status).toBe(400)
-      expect(response.error).toBeDefined()
-    })
-  })
+      expect(response.status).toBe(400);
+      expect(response.error).toBeDefined();
+    });
+  });
 
   it('RequestService post - Ok', async () => {
-    const requestService = new RequestService()
+    const requestService = new RequestService();
     mockedAxios.post.mockResolvedValue({
       data: {
         data: {},
       },
       status: 200,
-    })
+    });
 
-    const response = await requestService.post({ url: 'www.teste.com.br', token: '123456', data: {} })
-    expect(response.status).toBe(200)
-    expect(response.data).toBeDefined()
-  })
+    const response = await requestService.post({ url: 'www.teste.com.br', token: '123456', data: {} });
+    expect(response.status).toBe(200);
+    expect(response.data).toBeDefined();
+  });
 
   it('RequestService post - Error HTTP', () => {
-    const requestService = new RequestService()
+    const requestService = new RequestService();
     mockedAxios.post.mockRejectedValueOnce({
       response: {
         data: {
-          error: 'error http'
+          error: 'error http',
         },
-        status: 400
-      }
-    })
+        status: 400,
+      },
+    });
 
     requestService.post({ url: 'www.teste.com.br', token: '545878', data: {} }).catch((response) => {
-      expect(response.status).toBe(400)
-      expect(response.error).toBeDefined()
-    })
-  })
-})
+      expect(response.status).toBe(400);
+      expect(response.error).toBeDefined();
+    });
+  });
+});

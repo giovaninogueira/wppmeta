@@ -1,13 +1,13 @@
-import { RequestService } from '../../core/providers/request/request.service'
-import { WhatsAppPhone } from '../../core/providers/whatsapp/whatsapp.phone'
+import { RequestService } from '../../core/providers/request/request.service';
+import { WhatsAppPhone } from '../../core/providers/whatsapp/whatsapp.phone';
 
 describe('Test of provider WhatsApp Phone', () => {
   afterEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   it('Test List of phones - Ok', async () => {
-    const request = new RequestService()
+    const request = new RequestService();
     jest.spyOn(request, 'get').mockResolvedValue({
       data: [
         {
@@ -19,9 +19,9 @@ describe('Test of provider WhatsApp Phone', () => {
         },
       ],
       status: 200,
-    })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
-    const phones = await whatsAppPhone.getPhones()
+    });
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId');
+    const phones = await whatsAppPhone.getPhones();
     expect(phones).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -32,62 +32,64 @@ describe('Test of provider WhatsApp Phone', () => {
           qualityRating: expect.any(String),
         }),
       ]),
-    )
-  })
+    );
+  });
 
   it('Test List of phones - Error', async () => {
-    const request = new RequestService()
+    const request = new RequestService();
     jest.spyOn(request, 'get').mockRejectedValue({
       error: 'error',
       headers: {},
       status: 400,
-    })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
+    });
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId');
     whatsAppPhone.getPhones().catch((error) => {
-        expect(error).toEqual(
-            expect.objectContaining({
-                error: expect.any(String),
-                status: expect.any(Number)
-            })
-        )
-    })
-  })
+      expect(error).toEqual(
+        expect.objectContaining({
+          error: expect.any(String),
+          status: expect.any(Number),
+        }),
+      );
+    });
+  });
 
   it('Test register phones - Ok', async () => {
-    const request = new RequestService()
+    const request = new RequestService();
     jest.spyOn(request, 'post').mockResolvedValue({
       data: {
-        success: 'true'
+        success: 'true',
       },
       status: 200,
-    })
-    
-    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
+    });
+
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId');
     const success = await whatsAppPhone.registerPhone({
       phoneId: '6545889',
-      pin: '123456'
-    })
-    expect(success).toEqual(true)
-  })
+      pin: '123456',
+    });
+    expect(success).toEqual(true);
+  });
 
   it('Test List of phones - Error', async () => {
-    const request = new RequestService()
+    const request = new RequestService();
     jest.spyOn(request, 'post').mockRejectedValue({
       error: 'error',
       headers: {},
       status: 400,
-    })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
-    whatsAppPhone.registerPhone({
-      phoneId: '6545889',
-      pin: '123456'
-    }).catch((error) => {
+    });
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId');
+    whatsAppPhone
+      .registerPhone({
+        phoneId: '6545889',
+        pin: '123456',
+      })
+      .catch((error) => {
         expect(error).toEqual(
-            expect.objectContaining({
-                error: expect.any(String),
-                status: expect.any(Number)
-            })
-        )
-    })
-  })
-})
+          expect.objectContaining({
+            error: expect.any(String),
+            status: expect.any(Number),
+          }),
+        );
+      });
+  });
+});

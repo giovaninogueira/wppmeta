@@ -1,5 +1,5 @@
-import { IRequestService } from '../../interfaces/irequest.service'
-import 'dotenv/config'
+import { IRequestService } from '../../interfaces/irequest.service';
+import 'dotenv/config';
 
 class WhatsAppService {
   /**
@@ -14,8 +14,8 @@ class WhatsAppService {
     protected phoneId: string,
     protected accountId?: string,
   ) {
-    this.accountId = this.accountId ?? process.env.WHATSAPP_ACCOUNT_ID_CLOUD_API
+    this.accountId = this.accountId ?? process.env.WHATSAPP_ACCOUNT_ID_CLOUD_API;
   }
 }
 
-export { WhatsAppService }
+export { WhatsAppService };

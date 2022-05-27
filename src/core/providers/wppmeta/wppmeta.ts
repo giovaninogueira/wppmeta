@@ -1,8 +1,8 @@
-import { IWhatsApp } from '../../interfaces/iwhatsapp'
-import { RequestService } from '../request/request.service'
-import { WhatsApp } from '../whatsapp/whatsapp'
-import { WhatsAppMessage } from '../whatsapp/whatsapp.message'
-import { WhatsAppPhone } from '../whatsapp/whatsapp.phone'
+import { IWhatsApp } from '../../interfaces/iwhatsapp';
+import { RequestService } from '../request/request.service';
+import { WhatsApp } from '../whatsapp/whatsapp';
+import { WhatsAppMessage } from '../whatsapp/whatsapp.message';
+import { WhatsAppPhone } from '../whatsapp/whatsapp.phone';
 
 interface IWppMetaConfig {
   phoneId: string;
@@ -17,12 +17,12 @@ abstract class WppMeta {
    * @returns { IWhatsApp }
    */
   static config(wppConfig: IWppMetaConfig): IWhatsApp {
-    const request = new RequestService()
+    const request = new RequestService();
     return new WhatsApp(
       new WhatsAppPhone(request, wppConfig.token, wppConfig.phoneId, wppConfig.accountId),
       new WhatsAppMessage(request, wppConfig.token, wppConfig.phoneId, wppConfig.accountId),
-    )
+    );
   }
 }
 
-export { WppMeta }
+export { WppMeta };

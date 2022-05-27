@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import 'dotenv/config';
 
 /**
  * Get URL with endpoint
@@ -6,5 +6,5 @@ import 'dotenv/config'
  * @returns { string }
  */
 export const getUrl = (endpoint: string): string => {
-  return `${process.env.URL_WHATSAPP_CLOUD_API_META}/${endpoint}`
-}
+  return `${process.env.URL_WHATSAPP_CLOUD_API_META}/${endpoint}`;
+};

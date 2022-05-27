@@ -1,5 +1,10 @@
-import { IRequestWhatsAppMessageLocationSend, IRequestWhatsAppMessageMidiaSend, IRequestWhatsAppMessageTextSend, IResponseWhatsAppMessageSend } from './iwhatsapp.message'
-import { IPhoneWhatsApp, IRegisterPhone } from './iwhatsapp.phone'
+import {
+  IRequestWhatsAppMessageLocationSend,
+  IRequestWhatsAppMessageMidiaSend,
+  IRequestWhatsAppMessageTextSend,
+  IResponseWhatsAppMessageSend,
+} from './iwhatsapp.message';
+import { IPhoneWhatsApp, IRegisterPhone } from './iwhatsapp.phone';
 
 interface IWhatsApp {
   /**
@@ -10,13 +15,13 @@ interface IWhatsApp {
    * @param registerPhone
    * @returns { Promise<boolean > }
    */
-  registerPhone(registerPhone: IRegisterPhone): Promise<boolean >;
+  registerPhone(registerPhone: IRegisterPhone): Promise<boolean>;
 
   /**
    * Get phones of business account
    * @returns { Promise<IPhoneWhatsApp[] > }
    */
-  getPhones(): Promise<IPhoneWhatsApp[] >;
+  getPhones(): Promise<IPhoneWhatsApp[]>;
 
   /**
    * To send a message for an number phone whatsapp.
@@ -24,23 +29,23 @@ interface IWhatsApp {
    * @param { IRequestWhatsAppMessageTextSend } message
    * @returns { Promise<IResponseWhatsAppMessageSend >}
    */
-  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend >;
+  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend>;
 
   /**
    * To send a message type midia for an number phone whatsapp.
    *  - Business Solution Providers (BSPs) must authenticate themselves with an access token with the whatsapp_business_messaging permission
-   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   * @param { IRequestWhatsAppMessageMidiaSend } message
    * @returns { Promise<IResponseWhatsAppMessageSend >}
    */
-  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend >
+  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend>;
 
   /**
    * To send a message type location for an number phone whatsapp.
    *  - Business Solution Providers (BSPs) must authenticate themselves with an access token with the whatsapp_business_messaging permission
-   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   * @param { IRequestWhatsAppMessageMidiaSend } message
    * @returns { Promise<IResponseWhatsAppMessageSend >}
    */
-  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend >;
+  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend>;
 }
 
-export { IWhatsApp }
+export { IWhatsApp };

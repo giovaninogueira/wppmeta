@@ -3,18 +3,18 @@ import {
   IRegisterPhone,
   IResponseWhatsAppPhone,
   IWhatsAppPhone,
-} from '../../interfaces/iwhatsapp.phone'
-import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
-import { MESSAGE_PRODUCT } from '../../types/whatsapp.types'
-import { getUrl } from '../../utils/generate-url'
-import { WhatsAppService } from './whatsapp.service'
+} from '../../interfaces/iwhatsapp.phone';
+import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service';
+import { MESSAGE_PRODUCT } from '../../types/whatsapp.types';
+import { getUrl } from '../../utils/generate-url';
+import { WhatsAppService } from './whatsapp.service';
 
 class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
   /**
    * @inheritdoc
    */
-  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean > {
-    const url = getUrl(`/${registerPhone.phoneId}/register`)
+  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean> {
+    const url = getUrl(`/${registerPhone.phoneId}/register`);
     return new Promise((resolve, reject) => {
       this.request
         .post({
@@ -26,17 +26,17 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
           },
         })
         .then((response) => {
-          resolve(response.data.success === 'true')
+          resolve(response.data.success === 'true');
         })
-        .catch((error: IWhatsAppErrorAPI) => reject(error))
-    })
+        .catch((error: IWhatsAppErrorAPI) => reject(error));
+    });
   }
 
   /**
    * @inheritdoc
    */
-  async getPhones(): Promise<IPhoneWhatsApp[] > {
-    const url = getUrl(`/${this.accountId}/phone_numbers`)
+  async getPhones(): Promise<IPhoneWhatsApp[]> {
+    const url = getUrl(`/${this.accountId}/phone_numbers`);
     return new Promise((resolve, reject) => {
       this.request
         .get({
@@ -51,13 +51,13 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
               codeVerificationStatus: data.code_verification_status,
               displayPhoneNumber: data.display_phone_number,
               qualityRating: data.quality_rating,
-            }
-          })
-          resolve(phones)
+            };
+          });
+          resolve(phones);
         })
-        .catch((error: IWhatsAppErrorAPI) => reject(error))
-    })
+        .catch((error: IWhatsAppErrorAPI) => reject(error));
+    });
   }
 }
 
-export { WhatsAppPhone }
+export { WhatsAppPhone };

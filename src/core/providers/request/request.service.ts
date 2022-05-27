@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { IRequestService, IResponse } from '../../interfaces/irequest.service'
+import axios from 'axios';
+import { IRequestService, IResponse } from '../../interfaces/irequest.service';
 
 class RequestService implements IRequestService {
   /**
@@ -10,14 +10,14 @@ class RequestService implements IRequestService {
   private makeHeaders(token: string): any {
     return {
       headers: { Authorization: `Bearer ${token}` },
-    }
+    };
   }
 
   /**
    * @inheritdoc
    */
   get({ url, token }: { url: string; token: string }): Promise<IResponse> {
-    const config = this.makeHeaders(token)
+    const config = this.makeHeaders(token);
     return new Promise((resolve, reject) => {
       axios
         .get(url, config)
@@ -33,15 +33,15 @@ class RequestService implements IRequestService {
             headers: error.response.headers,
             status: error.response.status,
           }),
-        )
-    })
+        );
+    });
   }
 
   /**
    * @inheritdoc
    */
-  post({ url, token, data }: { url: string; token: string, data: any }): Promise<IResponse> {
-    const config = this.makeHeaders(token)
+  post({ url, token, data }: { url: string; token: string; data: any }): Promise<IResponse> {
+    const config = this.makeHeaders(token);
     return new Promise((resolve, reject) => {
       axios
         .post(url, data, config)
@@ -57,9 +57,9 @@ class RequestService implements IRequestService {
             headers: error.response.headers,
             status: error.response.status,
           }),
-        )
-    })
+        );
+    });
   }
 }
 
-export { RequestService }
+export { RequestService };

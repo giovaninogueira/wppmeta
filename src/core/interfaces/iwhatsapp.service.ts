@@ -1,4 +1,4 @@
-import { IRequestService } from './irequest.service'
+import { IRequestService } from './irequest.service';
 
 interface IWhatsAppErrorAPI<T = any> {
   error?: T;
@@ -12,4 +12,4 @@ interface IWhatsAppConfig {
   accountId?: string;
 }
 
-export { IWhatsAppErrorAPI, IWhatsAppConfig }
+export { IWhatsAppErrorAPI, IWhatsAppConfig };

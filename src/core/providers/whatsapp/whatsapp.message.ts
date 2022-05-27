@@ -4,41 +4,41 @@ import {
   IRequestWhatsAppMessageTextSend,
   IResponseWhatsAppMessageSend,
   IWhatsAppMessage,
-} from '../../interfaces/iwhatsapp.message'
-import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
+} from '../../interfaces/iwhatsapp.message';
+import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service';
 import {
   MESSAGE_LOCATION,
   MESSAGE_MIDIA,
   MESSAGE_PRODUCT,
   MESSAGE_TEXT,
   RECIPIENT_TYPE,
-} from '../../types/whatsapp.types'
-import { getUrl } from '../../utils/generate-url'
-import { WhatsAppService } from './whatsapp.service'
+} from '../../types/whatsapp.types';
+import { getUrl } from '../../utils/generate-url';
+import { WhatsAppService } from './whatsapp.service';
 
 class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
   /**
    * @inheritdoc
    */
   async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend> {
-    const objRequest = this.makeObjRequestText(message)
-    return this.requestMessage(objRequest)
+    const objRequest = this.makeObjRequestText(message);
+    return this.requestMessage(objRequest);
   }
 
   /**
    * @inheritdoc
    */
   async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend> {
-    const objRequest = this.makeObjRequestMidia(message)
-    return this.requestMessage(objRequest)
+    const objRequest = this.makeObjRequestMidia(message);
+    return this.requestMessage(objRequest);
   }
 
   /**
    * @inheritdoc
    */
   async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend> {
-    const objRequest = this.makeObjRequestLocation(message)
-    return this.requestMessage(objRequest)
+    const objRequest = this.makeObjRequestLocation(message);
+    return this.requestMessage(objRequest);
   }
 
   /**
@@ -47,7 +47,7 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
    * @returns { Promise<any> }
    */
   private async requestMessage(objRequest: any): Promise<any> {
-    const url = getUrl(`${this.phoneId}/messages`)
+    const url = getUrl(`${this.phoneId}/messages`);
     return new Promise((resolve, reject) => {
       this.request
         .post({
@@ -56,10 +56,10 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
           data: objRequest,
         })
         .then((response) => {
-          resolve(this.makeResponse(response.data))
+          resolve(this.makeResponse(response.data));
         })
-        .catch((error: IWhatsAppErrorAPI) => reject(error))
-    })
+        .catch((error: IWhatsAppErrorAPI) => reject(error));
+    });
   }
 
   /**
@@ -74,14 +74,14 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
         return {
           phoneNumber: contract.input,
           whatsAppId: contract.wa_id,
-        }
+        };
       }),
       messages: data.messages.map((message: any) => {
         return {
           wamId: message.id,
-        }
+        };
       }),
-    }
+    };
   }
 
   /**
@@ -95,7 +95,7 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
       to: message.to,
       type: MESSAGE_LOCATION,
       location: message.location,
-    }
+    };
   }
 
   /**
@@ -111,7 +111,7 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
       image: {
         id: message.mediaObjectId,
       },
-    }
+    };
   }
 
   /**
@@ -129,8 +129,8 @@ class WhatsAppMessage extends WhatsAppService implements IWhatsAppMessage {
         preview_url: message.body.useUrl,
         body: message.body.message,
       },
-    }
+    };
   }
 }
 
-export { WhatsAppMessage }
+export { WhatsAppMessage };

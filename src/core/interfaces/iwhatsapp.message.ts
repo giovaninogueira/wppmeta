@@ -1,4 +1,4 @@
-import { IWhatsAppErrorAPI } from './iwhatsapp.service'
+import { IWhatsAppErrorAPI } from './iwhatsapp.service';
 
 interface IResponseWhatsAppMessageSend {
   messagingProduct: 'whatsapp';
@@ -37,11 +37,10 @@ interface IRequestWhatsAppMessageLocationSend {
   };
 }
 
-
 interface IWhatsAppMessage {
-  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend >;
-  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend >;
-  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend >;
+  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend>;
+  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend>;
+  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend>;
 }
 
 export {
@@ -49,5 +48,5 @@ export {
   IResponseWhatsAppMessageSend,
   IRequestWhatsAppMessageTextSend,
   IRequestWhatsAppMessageMidiaSend,
-  IRequestWhatsAppMessageLocationSend
-}
+  IRequestWhatsAppMessageLocationSend,
+};

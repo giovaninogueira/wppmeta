@@ -1,4 +1,4 @@
-import { IWhatsAppErrorAPI } from './iwhatsapp.service'
+import { IWhatsAppErrorAPI } from './iwhatsapp.service';
 
 interface IPhoneWhatsApp {
   id: string;
@@ -22,8 +22,8 @@ interface IRegisterPhone {
 }
 
 interface IWhatsAppPhone {
-  registerPhone(registerPhone: IRegisterPhone): Promise<boolean >;
-  getPhones(): Promise<IPhoneWhatsApp[] >;
+  registerPhone(registerPhone: IRegisterPhone): Promise<boolean>;
+  getPhones(): Promise<IPhoneWhatsApp[]>;
 }
 
-export { IWhatsAppPhone, IPhoneWhatsApp, IResponseWhatsAppPhone, IRegisterPhone }
+export { IWhatsAppPhone, IPhoneWhatsApp, IResponseWhatsAppPhone, IRegisterPhone };

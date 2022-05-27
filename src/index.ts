@@ -1,3 +1,3 @@
-import { WppMeta } from './core/providers/wppmeta/wppmeta'
+import { WppMeta } from './core/providers/wppmeta/wppmeta';
 
-export { WppMeta }
+export { WppMeta };
