@@ -1,6 +1,5 @@
 import { IRequestWhatsAppMessageLocationSend, IRequestWhatsAppMessageMidiaSend, IRequestWhatsAppMessageTextSend, IResponseWhatsAppMessageSend } from './iwhatsapp.message'
 import { IPhoneWhatsApp, IRegisterPhone } from './iwhatsapp.phone'
-import { IWhatsAppErrorAPI } from './iwhatsapp.service'
 
 interface IWhatsApp {
   /**

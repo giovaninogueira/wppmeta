@@ -1,7 +1,6 @@
 import { IRequestService } from './irequest.service'
 
 interface IWhatsAppErrorAPI<T = any> {
-  data?: T;
   error?: T;
   headers?: T;
   status: number;

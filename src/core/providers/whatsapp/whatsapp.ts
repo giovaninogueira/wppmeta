@@ -7,7 +7,6 @@ import {
   IWhatsAppMessage,
 } from '../../interfaces/iwhatsapp.message'
 import { IPhoneWhatsApp, IRegisterPhone, IWhatsAppPhone } from '../../interfaces/iwhatsapp.phone'
-import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
 
 class WhatsApp implements IWhatsApp {
   /**
