@@ -6,7 +6,7 @@
 ![npm](https://img.shields.io/npm/dw/wppmeta)
 
 
-Libray not official javascript to [WhatsApp Cloud API](https://developers.facebook.com/docs/whatsapp/cloud-api). Repository of [wppmeta](https://github.com/giovaninogueira/wppmeta). 
+library not official javascript to [WhatsApp Cloud API](https://developers.facebook.com/docs/whatsapp/cloud-api). Repository of [wppmeta](https://github.com/giovaninogueira/wppmeta). 
 
 ## Features supported
 1. Sending messages
@@ -15,7 +15,7 @@ Libray not official javascript to [WhatsApp Cloud API](https://developers.facebo
 
 ## Future updates
 1. Sending messages for templates
-2. Sending messgaes for buttons
+2. Sending messages for buttons
 3. Create templates of messages
 4. Update templates of messages
 5. Delete templates of messages
@@ -38,7 +38,7 @@ Follow the steps of [Facebook Cloud Api](https://developers.facebook.com/docs/wh
 
 Once you're follow the above procedures, now you're ready to start hacking with the Wrapper.
 
-## Get Started libray WppMeta
+## Get Started library WppMeta
 
 Here how you authenticate your application, you need to specofy two things the ```TOKEN``` and ```phone_number_id``` of your test number
 
