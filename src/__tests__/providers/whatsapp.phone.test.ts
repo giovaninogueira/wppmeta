@@ -64,11 +64,10 @@ describe('Test of provider WhatsApp Phone', () => {
     
     const whatsAppPhone = new WhatsAppPhone(request, 'token')
     const success = await whatsAppPhone.registerPhone({
-      messagingProduct: 'whatsapp',
       phoneId: '6545889',
       pin: '123456'
     })
-    expect(true).toEqual(true)
+    expect(success).toEqual(true)
   })
 
   it('Test List of phones - Error', async () => {
@@ -80,7 +79,6 @@ describe('Test of provider WhatsApp Phone', () => {
     })
     const whatsAppPhone = new WhatsAppPhone(request, 'token')
     whatsAppPhone.registerPhone({
-      messagingProduct: 'whatsapp',
       phoneId: '6545889',
       pin: '123456'
     }).catch((error) => {

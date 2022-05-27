@@ -1,3 +1,5 @@
+import { IWhatsAppErrorAPI } from './iwhatsapp.service'
+
 interface IResponseWhatsAppMessageSend {
   messagingProduct: 'whatsapp';
   contacts: Array<{
@@ -9,12 +11,11 @@ interface IResponseWhatsAppMessageSend {
   }>;
 }
 
-interface IRequestWhatsAppMessageSend {
-  messagingProduct: 'whatsapp';
+interface IRequestWhatsAppMessageTextSend {
+  phoneId: string;
   recipientType: 'individual';
   to: string;
-  type?: string;
-  text?: {
+  text: {
     previewUrl: boolean;
     body: string;
   };
@@ -33,10 +34,10 @@ interface IWhatsAppMessage {
   /**
    * To send a message for an number phone whatsapp.
    *  - Business Solution Providers (BSPs) must authenticate themselves with an access token with the whatsapp_business_messaging permission
-   * @param { IRequestWhatsAppMessageSend } message 
-   * @returns Promise<IResponseWhatsAppMessageSend> 
+   * @param { IRequestWhatsAppMessageTextSend } message
+   * @returns { Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>} 
    */
-  send(message: IRequestWhatsAppMessageSend): Promise<IResponseWhatsAppMessageSend>;
+  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
 }
 
-export { IWhatsAppMessage, IResponseWhatsAppMessageSend, IRequestWhatsAppMessageSend }
+export { IWhatsAppMessage, IResponseWhatsAppMessageSend, IRequestWhatsAppMessageTextSend }

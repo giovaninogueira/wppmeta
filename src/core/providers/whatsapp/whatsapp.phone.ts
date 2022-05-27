@@ -5,6 +5,7 @@ import {
   IWhatsAppPhone,
 } from '../../interfaces/iwhatsapp.phone'
 import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
+import { MESSAGE_PRODUCT } from '../../types/whatsapp.types'
 import { getUrl } from '../../utils/generate-url'
 import { WhatsAppService } from './whatsapp.service'
 
@@ -20,7 +21,7 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
           url,
           token: this.token,
           data: {
-            messaging_product: registerPhone.messagingProduct,
+            messaging_product: MESSAGE_PRODUCT,
             pin: registerPhone.pin,
           },
         })

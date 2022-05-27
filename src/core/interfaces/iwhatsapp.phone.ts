@@ -18,7 +18,6 @@ interface IResponseWhatsAppPhone {
 
 interface IRegisterPhone {
   phoneId: string;
-  messagingProduct: 'whatsapp',
   pin: string;
 }
 

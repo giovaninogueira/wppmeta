@@ -1,31 +1,54 @@
 import {
-  IRequestWhatsAppMessageSend,
+  IRequestWhatsAppMessageTextSend,
   IResponseWhatsAppMessageSend,
   IWhatsAppMessage,
 } from '../../interfaces/iwhatsapp.message'
+import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
+import { MESSAGE_PRODUCT, MESSAGE_TEXT } from '../../types/whatsapp.types'
+import { getUrl } from '../../utils/generate-url'
 import { WhatsAppService } from './whatsapp.service'
 
-class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage {
+class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage {  
   /**
    * @inheritdoc
    */
-  @makeObjectRequest()
-  send(message: IRequestWhatsAppMessageSend): Promise<IResponseWhatsAppMessageSend> {
-    console.log(message)
-    throw new Error('oi')
+  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+    const url = getUrl(`${message.phoneId}/messages`)
+    const objRequest = this.makeObjRequestText(message)
+    return new Promise((resolve, reject) => {
+      this.request
+        .post({
+          url,
+          token: this.token,
+          data: objRequest,
+        })
+        .then((response) => {
+          console.log(JSON.stringify(objRequest))
+          resolve({
+            messagingProduct: MESSAGE_PRODUCT,
+            contacts: [],
+            messages: []
+          })
+        })
+        .catch((error: IWhatsAppErrorAPI) => reject(error))
+    })
   }
-}
 
-/**
- * Make Object Request
- * @returns { T }
- */
-function makeObjectRequest<T>() {
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value!
-    descriptor.value = (message: IRequestWhatsAppMessageSend) => {
-      console.log(message)
-      return originalMethod.bind(descriptor.value)(message)
+  /**
+   * Make Obj Request Text
+   * @param message 
+   * @returns 
+   */
+  private makeObjRequestText(message: IRequestWhatsAppMessageTextSend) {
+    return {
+      messaging_product: MESSAGE_PRODUCT,
+      recipient_type: message.recipientType,
+      to: message.to,
+      type: MESSAGE_TEXT,
+      text: {
+        preview_url: message.text.previewUrl,
+        body: message.text.body,
+      },
     }
   }
 }
