@@ -1,18 +1,14 @@
-import { IRequestService } from '../../interfaces/irequest.service'
-import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
 import {
   IPhoneWhatsApp,
   IRegisterPhone,
   IResponseWhatsAppPhone,
   IWhatsAppPhone,
 } from '../../interfaces/iwhatsapp.phone'
+import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
 import { getUrl } from '../../utils/generate-url'
+import { WhatsAppService } from './whatsapp.service'
 
-class WhatsAppPhone implements IWhatsAppPhone {
-  constructor(private request: IRequestService, private token: string, private accountId?: string) {
-    this.accountId = this.accountId ?? process.env.WHATSAPP_ACCOUNT_ID_CLOUD_API
-  }
-
+class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
   /**
    * @inheritdoc
    */

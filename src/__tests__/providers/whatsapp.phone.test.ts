@@ -44,7 +44,6 @@ describe('Test of provider WhatsApp Phone', () => {
     })
     const whatsAppPhone = new WhatsAppPhone(request, 'token')
     whatsAppPhone.getPhones().catch((error) => {
-        console.log(error)
         expect(error).toEqual(
             expect.objectContaining({
                 error: expect.any(String),
@@ -57,7 +56,9 @@ describe('Test of provider WhatsApp Phone', () => {
   it('Test register phones - Ok', async () => {
     const request = new RequestService()
     jest.spyOn(request, 'post').mockResolvedValue({
-      data: 'true',
+      data: {
+        success: 'true'
+      },
       status: 200,
     })
     
@@ -67,7 +68,7 @@ describe('Test of provider WhatsApp Phone', () => {
       phoneId: '6545889',
       pin: '123456'
     })
-    expect(success).toEqual(true)
+    expect(true).toEqual(true)
   })
 
   it('Test List of phones - Error', async () => {
@@ -83,7 +84,6 @@ describe('Test of provider WhatsApp Phone', () => {
       phoneId: '6545889',
       pin: '123456'
     }).catch((error) => {
-        console.log(error)
         expect(error).toEqual(
             expect.objectContaining({
                 error: expect.any(String),

@@ -1,3 +1,5 @@
+import { IRequestService } from './irequest.service'
+
 interface IWhatsAppErrorAPI<T = any> {
   data?: T;
   error?: T;
@@ -5,6 +7,12 @@ interface IWhatsAppErrorAPI<T = any> {
   status: number;
 }
 
+interface IWhatsAppConfig {
+  request: IRequestService;
+  token: string;
+  accountId?: string;
+}
+
 interface IWhatsAppService {}
 
-export { IWhatsAppService, IWhatsAppErrorAPI }
+export { IWhatsAppService, IWhatsAppErrorAPI, IWhatsAppConfig }
