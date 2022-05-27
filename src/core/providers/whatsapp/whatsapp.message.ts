@@ -1,20 +1,47 @@
 import {
+  IRequestWhatsAppMessageLocationSend,
+  IRequestWhatsAppMessageMidiaSend,
   IRequestWhatsAppMessageTextSend,
   IResponseWhatsAppMessageSend,
   IWhatsAppMessage,
 } from '../../interfaces/iwhatsapp.message'
 import { IWhatsAppErrorAPI } from '../../interfaces/iwhatsapp.service'
-import { MESSAGE_PRODUCT, MESSAGE_TEXT } from '../../types/whatsapp.types'
+import { MESSAGE_LOCATION, MESSAGE_MIDIA, MESSAGE_PRODUCT, MESSAGE_TEXT, RECIPIENT_TYPE } from '../../types/whatsapp.types'
 import { getUrl } from '../../utils/generate-url'
 import { WhatsAppService } from './whatsapp.service'
 
-class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage {  
+class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage {
   /**
    * @inheritdoc
    */
-  sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
-    const url = getUrl(`${message.phoneId}/messages`)
+  async sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
     const objRequest = this.makeObjRequestText(message)
+    return this.requestMessage(objRequest)
+  }
+
+  /**
+   * @inheritdoc
+   */
+  async sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+    const objRequest = this.makeObjRequestMidia(message)
+    return this.requestMessage(objRequest)
+  }
+
+  /**
+   * @inheritdoc
+   */
+  async sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI> {
+    const objRequest = this.makeObjRequestLocation(message)
+    return this.requestMessage(objRequest)
+  }
+
+  /**
+   * Request Message
+   * @param objRequest 
+   * @returns { Promise<any> }
+   */
+  private async requestMessage(objRequest: any): Promise<any> {
+    const url = getUrl(`${this.phoneId}/messages`)
     return new Promise((resolve, reject) => {
       this.request
         .post({
@@ -23,31 +50,78 @@ class WhatsAppMessageService extends WhatsAppService implements IWhatsAppMessage
           data: objRequest,
         })
         .then((response) => {
-          console.log(JSON.stringify(objRequest))
-          resolve({
-            messagingProduct: MESSAGE_PRODUCT,
-            contacts: [],
-            messages: []
-          })
+          resolve(this.makeResponse(response.data))
         })
         .catch((error: IWhatsAppErrorAPI) => reject(error))
     })
   }
 
   /**
+   * Make Response
+   * @param data 
+   * @returns { IResponseWhatsAppMessageSend }
+   */
+  private makeResponse(data: any): IResponseWhatsAppMessageSend {
+    return {
+      messagingProduct: MESSAGE_PRODUCT,
+      contacts: data.contacts.map((contract: any) => {
+        return {
+          phoneNumber: contract.input,
+          whatsAppId: contract.wa_id,
+        }
+      }),
+      messages: data.messages.map((message: any) => {
+        return {
+          wamId: message.id
+        }
+      }),
+    }
+  }
+
+  /**
+   * Make Obj request location
+   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   */
+   private makeObjRequestLocation(message: IRequestWhatsAppMessageLocationSend) {
+    return {
+      messaging_product: MESSAGE_PRODUCT,
+      recipient_type: message.recipientType ?? RECIPIENT_TYPE,
+      to: message.to,
+      type: MESSAGE_LOCATION,
+      location: message.location,
+    }
+  }
+
+  /**
+   * Make Obj request midia
+   * @param { IRequestWhatsAppMessageMidiaSend } message 
+   */
+  private makeObjRequestMidia(message: IRequestWhatsAppMessageMidiaSend) {
+    return {
+      messaging_product: MESSAGE_PRODUCT,
+      recipient_type: message.recipientType ?? RECIPIENT_TYPE,
+      to: message.to,
+      type: MESSAGE_MIDIA,
+      image: {
+        id: message.mediaObjectId,
+      },
+    }
+  }
+
+  /**
    * Make Obj Request Text
-   * @param message 
-   * @returns 
+   * @param message
+   * @returns
    */
   private makeObjRequestText(message: IRequestWhatsAppMessageTextSend) {
     return {
       messaging_product: MESSAGE_PRODUCT,
-      recipient_type: message.recipientType,
+      recipient_type: message.recipientType ?? RECIPIENT_TYPE,
       to: message.to,
       type: MESSAGE_TEXT,
       text: {
-        preview_url: message.text.previewUrl,
-        body: message.text.body,
+        preview_url: message.body.useUrl,
+        body: message.body.message,
       },
     }
   }

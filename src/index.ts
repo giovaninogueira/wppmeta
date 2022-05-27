@@ -1,17 +1,22 @@
-import { RequestService } from './core/providers/request/request.service'
-import { WhatsAppMessageService } from './core/providers/whatsapp/whatsapp.message'
+import { WppMeta } from './core/providers/wppmeta/wppmeta'
 
-const request = new RequestService()
-const token = 'EAAHGSsvHDYwBADJYSp61t6AlZBTHcnA0UOTQUgpiy8Ypm52XzWJW7lIQWWg9kIZATZAhd7ZBZAI9qc1aif3fkLvqlCGzUtszIO1ZCtJ2TKmZBaPKZAyzUyDsr15UHdO4HoB0VHAZCaHbnnjtMkqMpkWDRwJW8ZBnWUfymg5XPJZArxUoHHm4ys5QnhPBaIMpRJlTaIKEEJiZBZCiRSAZDZD'
-const whats = new WhatsAppMessageService(request, token)
-whats.sendText({
-  recipientType: 'individual',
-  phoneId: '107957148596580',
-  to: '5517992230802',
-  text: {
-    previewUrl: false,
-    body: 'olá'
-  }
-}).then((data) => {
-  console.log(data)
-}).catch((error) => console.log(error))
+const token =
+  'EAAKk8rcIctoBAH0wtnjW3kDQZCGg7VsguK5yoj2qOZCZCD3jaZCli6taY6ObMdA3DgvezfyYFYPcsPEhpiMbVcwCOKuIH668W5AhCclyf3WXJ5V1mjsrXzTjRnD5TsPZC3v1lPrCDeSK6j5ii8ZAeF3v0sTUOe6nXtVDfruXPYnfwr1aniO1XLV3vyZAdBUKwdkVwsQ3fB5AQZDZD'
+const whatsApp = WppMeta.config({
+  token,
+  accountId: '108299961890984',
+  phoneId: '103858795675152',
+})
+
+whatsApp
+  .sendLocation({
+    to: '5517992230802',
+    location: {
+      longitude: '-20.7751211',
+      latitude: '-49.4194561',
+      name: 'Giovani',
+      address: 'Rua',
+    },
+  })
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error))

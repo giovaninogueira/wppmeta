@@ -13,7 +13,7 @@ class WhatsAppPhone extends WhatsAppService implements IWhatsAppPhone {
   /**
    * @inheritdoc
    */
-  registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI> {
+  async registerPhone(registerPhone: IRegisterPhone): Promise<boolean | IWhatsAppErrorAPI> {
     const url = getUrl(`/${registerPhone.phoneId}/register`)
     return new Promise((resolve, reject) => {
       this.request

@@ -12,32 +12,42 @@ interface IResponseWhatsAppMessageSend {
 }
 
 interface IRequestWhatsAppMessageTextSend {
-  phoneId: string;
-  recipientType: 'individual';
+  recipientType?: 'individual';
   to: string;
-  text: {
-    previewUrl: boolean;
-    body: string;
-  };
-  image?: {
-    mediaObjectId: string;
-  };
-  location?: {
-    longitude: number;
-    latitude: number;
-    name: number;
-    address: number;
+  body: {
+    useUrl: boolean;
+    message: string;
   };
 }
+
+interface IRequestWhatsAppMessageMidiaSend {
+  recipientType?: 'individual';
+  to: string;
+  mediaObjectId: string;
+}
+
+interface IRequestWhatsAppMessageLocationSend {
+  recipientType?: 'individual';
+  to: string;
+  location: {
+    longitude: string;
+    latitude: string;
+    name: string;
+    address: string;
+  };
+}
+
 
 interface IWhatsAppMessage {
-  /**
-   * To send a message for an number phone whatsapp.
-   *  - Business Solution Providers (BSPs) must authenticate themselves with an access token with the whatsapp_business_messaging permission
-   * @param { IRequestWhatsAppMessageTextSend } message
-   * @returns { Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>} 
-   */
   sendText(message: IRequestWhatsAppMessageTextSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
+  sendMidia(message: IRequestWhatsAppMessageMidiaSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
+  sendLocation(message: IRequestWhatsAppMessageLocationSend): Promise<IResponseWhatsAppMessageSend | IWhatsAppErrorAPI>;
 }
 
-export { IWhatsAppMessage, IResponseWhatsAppMessageSend, IRequestWhatsAppMessageTextSend }
+export {
+  IWhatsAppMessage,
+  IResponseWhatsAppMessageSend,
+  IRequestWhatsAppMessageTextSend,
+  IRequestWhatsAppMessageMidiaSend,
+  IRequestWhatsAppMessageLocationSend
+}

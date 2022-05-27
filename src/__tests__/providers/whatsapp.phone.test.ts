@@ -20,7 +20,7 @@ describe('Test of provider WhatsApp Phone', () => {
       ],
       status: 200,
     })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
     const phones = await whatsAppPhone.getPhones()
     expect(phones).toEqual(
       expect.arrayContaining([
@@ -42,7 +42,7 @@ describe('Test of provider WhatsApp Phone', () => {
       headers: {},
       status: 400,
     })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
     whatsAppPhone.getPhones().catch((error) => {
         expect(error).toEqual(
             expect.objectContaining({
@@ -62,7 +62,7 @@ describe('Test of provider WhatsApp Phone', () => {
       status: 200,
     })
     
-    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
     const success = await whatsAppPhone.registerPhone({
       phoneId: '6545889',
       pin: '123456'
@@ -77,7 +77,7 @@ describe('Test of provider WhatsApp Phone', () => {
       headers: {},
       status: 400,
     })
-    const whatsAppPhone = new WhatsAppPhone(request, 'token')
+    const whatsAppPhone = new WhatsAppPhone(request, 'token', 'phoneId')
     whatsAppPhone.registerPhone({
       phoneId: '6545889',
       pin: '123456'
