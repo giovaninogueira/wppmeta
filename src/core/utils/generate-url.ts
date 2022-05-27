@@ -6,5 +6,5 @@ import 'dotenv/config';
  * @returns { string }
  */
 export const getUrl = (endpoint: string): string => {
-  return `https://graph.facebook.com/v13.0/${endpoint}`
-}
+  return `https://graph.facebook.com/v13.0/${endpoint}`;
+};
